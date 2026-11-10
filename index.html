@@ -3,9 +3,315 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Browse by Job Categories</title>
+
+    <!-- ฟอนต์ -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=DM+Sans:wght@400&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        darkBlue: "#25324B",
+                        orange: "#FF8345",
+                        softOrange: "#FFF0E8",
+                        greyText: "#7C8493",
+                    },
+                    fontFamily: {
+                        poppins: ["Poppins", "sans-serif"],
+                        dm: ["DM Sans", "sans-serif"],
+                    },
+                },
+            },
+        };
+    </script>
+
+    <!-- CSS สำหรับสไตล์ที่ซ้ำๆ (การ์ด) -->
+    <style>
+        /* กล่องย่อย: 333 x 268 */
+        .card {
+            width: 100%;
+            max-width: 333px;
+            height: 268px;
+            padding: 30px;
+            background: #ffffff;
+            border: 1px solid #EDEDED;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            text-decoration: none;
+            box-sizing: border-box;
+        }
+
+        .card:hover,
+        .card.active {
+            background: #F7F8F9;
+        }
+
+        /* คอลัมน์ซ้าย */
+        .card-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* วงกลมไอคอน */
+        .icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: #FFF0E8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .icon img {
+            width: 40px;
+            height: 40px;
+        }
+
+        /* hover / active → ไอคอนพื้นส้ม */
+        .card:hover .icon,
+        .card.active .icon {
+            background: #FF8345;
+            box-shadow: 0 12px 16px rgba(0, 0, 0, 0.08);
+        }
+
+        .icon .white { display: none; }
+        .card:hover .icon .orange,
+        .card.active .icon .orange { display: none; }
+        .card:hover .icon .white,
+        .card.active .icon .white { display: block; }
+
+        .card-name {
+            margin: 0;
+            color: #25324B;
+            font-size: 20px;
+            font-weight: 600;
+            line-height: 32px;
+        }
+
+        .card-jobs {
+            margin: 8px 0 0;
+            color: #7C8493;
+            font-family: "DM Sans", sans-serif;
+            font-size: 16px;
+        }
+
+        .card-arrow {
+            display: flex;
+            align-items: flex-end;
+        }
+
+        .card-arrow img {
+            width: 33px;
+            height: 33px;
+        }
+
+        /* การ์ด Explore */
+        .card-explore {
+            position: relative;
+            width: 100%;
+            max-width: 333px;
+            height: 268px;
+            background: #FF8345;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+
+        .card-explore .wave {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            pointer-events: none;
+        }
+
+        .explore-text {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: flex-end;
+            gap: 8px;
+            color: #fff;
+            font-size: 24px;
+            font-weight: 500;
+            line-height: 34px;
+        }
+
+        .explore-text img {
+            width: 33px;
+            height: 33px;
+            margin-bottom: 4px;
+        }
+    </style>
 </head>
-<body>
-    
+
+<body class="bg-white min-h-screen font-poppins">
+
+    <!--
+      Tailwind = จัด layout / responsive
+      CSS     = สไตล์การ์ดที่ซ้ำๆ
+      กล่องใหญ่ 1420x736 | กล่องย่อย 333x268
+    -->
+    <div class="max-w-[1920px] mx-auto flex justify-center px-4 py-10 lg:py-16">
+
+        <!-- กล่องใหญ่ (Tailwind) -->
+        <section class="w-full max-w-[1420px] lg:w-[1420px] lg:h-[736px] flex flex-col items-center lg:justify-between gap-8 lg:gap-0">
+
+            <!-- หัวข้อ (Tailwind) -->
+            <h1 class="text-center text-darkBlue font-bold text-[28px] lg:text-[40px] leading-[125%]">
+                Browse by<br>
+                <span class="relative inline-block z-10">
+                    Job
+                    <span class="absolute left-0 right-0 bottom-1 -z-10 h-3 bg-[#FFB088]"></span>
+                </span>
+                Categories
+            </h1>
+
+            <!-- กริด (Tailwind) : mobile 1 คอลัมน์ / desktop 4 คอลัมน์ -->
+            <div class="w-full grid grid-cols-1 lg:grid-cols-4 gap-5 lg:gap-[30px] justify-items-center">
+                <!-- 1 -->
+                <a href="#" class="card">
+                    <div class="card-left">
+                        <div class="icon">
+                            <img class="orange" src="icons/speaker.svg" alt="">
+                            <img class="white" src="icons/whiteSpeaker.svg" alt="">
+                        </div>
+                        <div>
+                            <h2 class="card-name">Digital Marketing</h2>
+                            <p class="card-jobs">143 Jobs Opened</p>
+                        </div>
+                    </div>
+                    <div class="card-arrow">
+                        <img src="icons/arrow-right-btn.svg" alt="">
+                    </div>
+                </a>
+
+                <!-- 2 -->
+                <a href="#" class="card">
+                    <div class="card-left">
+                        <div class="icon">
+                            <img class="orange" src="icons/pen.svg" alt="">
+                            <img class="white" src="icons/whitePen.svg" alt="">
+                        </div>
+                        <div>
+                            <h2 class="card-name">Art &amp; Design</h2>
+                            <p class="card-jobs">110 Jobs Opened</p>
+                        </div>
+                    </div>
+                    <div class="card-arrow">
+                        <img src="icons/arrow-right-btn.svg" alt="">
+                    </div>
+                </a>
+
+                <!-- 3 Accounting (active) -->
+                <a href="#" class="card active">
+                    <div class="card-left">
+                        <div class="icon">
+                            <img class="orange" src="icons/dollar-sign.svg" alt="">
+                            <img class="white" src="icons/whiteDollar-sign.svg" alt="">
+                        </div>
+                        <div>
+                            <h2 class="card-name">Accounting</h2>
+                            <p class="card-jobs">158 Jobs Opened</p>
+                        </div>
+                    </div>
+                    <div class="card-arrow">
+                        <img src="icons/arrow-right-btn.svg" alt="">
+                    </div>
+                </a>
+
+                <!-- 4 -->
+                <a href="#" class="card">
+                    <div class="card-left">
+                        <div class="icon">
+                            <img class="orange" src="icons/camera.svg" alt="">
+                            <img class="white" src="icons/whiteCamera.svg" alt="">
+                        </div>
+                        <div>
+                            <h2 class="card-name">Photography</h2>
+                            <p class="card-jobs">95 Jobs Opened</p>
+                        </div>
+                    </div>
+                    <div class="card-arrow">
+                        <img src="icons/arrow-right-btn.svg" alt="">
+                    </div>
+                </a>
+
+                <!-- 5 -->
+                <a href="#" class="card">
+                    <div class="card-left">
+                        <div class="icon">
+                            <img class="orange" src="icons/create.svg" alt="">
+                            <img class="white" src="icons/whiteCreate.svg" alt="">
+                        </div>
+                        <div>
+                            <h2 class="card-name">Copy Writing</h2>
+                            <p class="card-jobs">113 Jobs Opened</p>
+                        </div>
+                    </div>
+                    <div class="card-arrow">
+                        <img src="icons/arrow-right-btn.svg" alt="">
+                    </div>
+                </a>
+
+                <!-- 6 -->
+                <a href="#" class="card">
+                    <div class="card-left">
+                        <div class="icon">
+                            <img class="orange" src="icons/headphone.svg" alt="">
+                            <img class="white" src="icons/whiteHeadphone.svg" alt="">
+                        </div>
+                        <div>
+                            <h2 class="card-name">Music</h2>
+                            <p class="card-jobs">55 Jobs Opened</p>
+                        </div>
+                    </div>
+                    <div class="card-arrow">
+                        <img src="icons/arrow-right-btn.svg" alt="">
+                    </div>
+                </a>
+
+                <!-- 7 -->
+                <a href="#" class="card">
+                    <div class="card-left">
+                        <div class="icon">
+                            <img class="orange" src="icons/humans.svg" alt="">
+                            <img class="white" src="icons/whiteHumans.svg" alt="">
+                        </div>
+                        <div>
+                            <h2 class="card-name">Human Resources</h2>
+                            <p class="card-jobs">25 Jobs Opened</p>
+                        </div>
+                    </div>
+                    <div class="card-arrow">
+                        <img src="icons/arrow-right-btn.svg" alt="">
+                    </div>
+                </a>
+
+                <!-- 8 Explore -->
+                <a href="#" class="card-explore">
+                    <img class="wave" src="icons/twoWaves.svg" alt="">
+                    <div class="explore-text">
+                        <span>Explore<br>30 More<br>Categories</span>
+                        <img src="icons/arrow-right-white-btn.svg" alt="">
+                    </div>
+                </a>
+
+            </div>
+        </section>
+    </div>
+
 </body>
 </html>
