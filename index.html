@@ -19,8 +19,6 @@
                         orange: "#FF8345",
                         softOrange: "#FFF0E8",
                         greyText: "#7C8493",
-                        cardBorder: "#EDEDED",
-                        cardHover: "#F7F8F9",
                     },
                     fontFamily: {
                         poppins: ["Poppins", "sans-serif"],
@@ -30,24 +28,150 @@
             },
         };
     </script>
+
+    <!-- CSS สำหรับสไตล์ที่ซ้ำๆ (การ์ด) -->
+    <style>
+        /* กล่องย่อย: 333 x 268 */
+        .card {
+            width: 100%;
+            max-width: 333px;
+            height: 268px;
+            padding: 30px;
+            background: #ffffff;
+            border: 1px solid #EDEDED;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            text-decoration: none;
+            box-sizing: border-box;
+        }
+
+        .card:hover,
+        .card.active {
+            background: #F7F8F9;
+        }
+
+        /* คอลัมน์ซ้าย */
+        .card-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* วงกลมไอคอน */
+        .icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: #FFF0E8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .icon img {
+            width: 40px;
+            height: 40px;
+        }
+
+        /* hover / active → ไอคอนพื้นส้ม */
+        .card:hover .icon,
+        .card.active .icon {
+            background: #FF8345;
+            box-shadow: 0 12px 16px rgba(0, 0, 0, 0.08);
+        }
+
+        .icon .white { display: none; }
+        .card:hover .icon .orange,
+        .card.active .icon .orange { display: none; }
+        .card:hover .icon .white,
+        .card.active .icon .white { display: block; }
+
+        .card-name {
+            margin: 0;
+            color: #25324B;
+            font-size: 20px;
+            font-weight: 600;
+            line-height: 32px;
+        }
+
+        .card-jobs {
+            margin: 8px 0 0;
+            color: #7C8493;
+            font-family: "DM Sans", sans-serif;
+            font-size: 16px;
+        }
+
+        .card-arrow {
+            display: flex;
+            align-items: flex-end;
+        }
+
+        .card-arrow img {
+            width: 33px;
+            height: 33px;
+        }
+
+        /* การ์ด Explore */
+        .card-explore {
+            position: relative;
+            width: 100%;
+            max-width: 333px;
+            height: 268px;
+            background: #FF8345;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+
+        .card-explore .wave {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            pointer-events: none;
+        }
+
+        .explore-text {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: flex-end;
+            gap: 8px;
+            color: #fff;
+            font-size: 24px;
+            font-weight: 500;
+            line-height: 34px;
+        }
+
+        .explore-text img {
+            width: 33px;
+            height: 33px;
+            margin-bottom: 4px;
+        }
+    </style>
 </head>
 
 <body class="bg-white min-h-screen font-poppins">
 
     <!--
-      กล่องใหญ่: 1420 x 736
-      กล่องย่อย: 333 x 268
-      mobile 375px = 1 คอลัมน์
-      desktop = 4 คอลัมน์
+      Tailwind = จัด layout / responsive
+      CSS     = สไตล์การ์ดที่ซ้ำๆ
+      กล่องใหญ่ 1420x736 | กล่องย่อย 333x268
     -->
     <div class="max-w-[1920px] mx-auto flex justify-center px-4 py-10 lg:py-16">
 
-        <!-- กล่องใหญ่ -->
+        <!-- กล่องใหญ่ (Tailwind) -->
         <section class="w-full max-w-[1420px] lg:w-[1420px] lg:h-[736px] flex flex-col items-center lg:justify-between gap-8 lg:gap-0">
 
-            <!-- หัวข้อ -->
+            <!-- หัวข้อ (Tailwind) -->
             <h1 class="text-center text-darkBlue font-bold text-[28px] lg:text-[40px] leading-[125%]">
-                Browse by
+                Browse by<br>
                 <span class="relative inline-block z-10">
                     Job
                     <span class="absolute left-0 right-0 bottom-1 -z-10 h-3 bg-[#FFB088]"></span>
@@ -55,133 +179,134 @@
                 Categories
             </h1>
 
-            <!-- กริดการ์ด -->
+            <!-- กริด (Tailwind) : mobile 1 คอลัมน์ / desktop 4 คอลัมน์ -->
             <div class="w-full grid grid-cols-1 lg:grid-cols-4 gap-5 lg:gap-[30px] justify-items-center">
-
-                <!-- 1. Digital Marketing -->
-                <a href="#" class="group bg-white hover:bg-cardHover w-full max-w-[333px] lg:w-[333px] h-[268px] rounded-[8px] border border-cardBorder p-[30px] flex justify-between no-underline">
-                    <div class="flex flex-col justify-between">
-                        <div class="bg-softOrange group-hover:bg-orange group-hover:shadow-[0_12px_16px_rgba(0,0,0,0.08)] w-20 h-20 rounded-full flex items-center justify-center">
-                            <img src="icons/speaker.svg" alt="" class="w-10 h-10 group-hover:hidden">
-                            <img src="icons/whiteSpeaker.svg" alt="" class="w-10 h-10 hidden group-hover:block">
+แ
+                <!-- 1 -->
+                <a href="#" class="card">
+                    <div class="card-left">
+                        <div class="icon">
+                            <img class="orange" src="icons/speaker.svg" alt="">
+                            <img class="white" src="icons/whiteSpeaker.svg" alt="">
                         </div>
                         <div>
-                            <h2 class="text-darkBlue font-semibold text-xl leading-8">Digital Marketing</h2>
-                            <p class="text-greyText font-dm text-base mt-2">143 Jobs Opened</p>
+                            <h2 class="card-name">Digital Marketing</h2>
+                            <p class="card-jobs">143 Jobs Opened</p>
                         </div>
                     </div>
-                    <div class="flex items-end">
-                        <img src="icons/arrow-right-btn.svg" alt="" class="w-[33px] h-[33px]">
+                    <div class="card-arrow">
+                        <img src="icons/arrow-right-btn.svg" alt="">
                     </div>
                 </a>
 
-                <!-- 2. Art & Design -->
-                <a href="#" class="group bg-white hover:bg-cardHover w-full max-w-[333px] lg:w-[333px] h-[268px] rounded-[8px] border border-cardBorder p-[30px] flex justify-between no-underline">
-                    <div class="flex flex-col justify-between">
-                        <div class="bg-softOrange group-hover:bg-orange group-hover:shadow-[0_12px_16px_rgba(0,0,0,0.08)] w-20 h-20 rounded-full flex items-center justify-center">
-                            <img src="icons/pen.svg" alt="" class="w-10 h-10 group-hover:hidden">
-                            <img src="icons/whitePen.svg" alt="" class="w-10 h-10 hidden group-hover:block">
+                <!-- 2 -->
+                <a href="#" class="card">
+                    <div class="card-left">
+                        <div class="icon">
+                            <img class="orange" src="icons/pen.svg" alt="">
+                            <img class="white" src="icons/whitePen.svg" alt="">
                         </div>
                         <div>
-                            <h2 class="text-darkBlue font-semibold text-xl leading-8">Art &amp; Design</h2>
-                            <p class="text-greyText font-dm text-base mt-2">110 Jobs Opened</p>
+                            <h2 class="card-name">Art &amp; Design</h2>
+                            <p class="card-jobs">110 Jobs Opened</p>
                         </div>
                     </div>
-                    <div class="flex items-end">
-                        <img src="icons/arrow-right-btn.svg" alt="" class="w-[33px] h-[33px]">
+                    <div class="card-arrow">
+                        <img src="icons/arrow-right-btn.svg" alt="">
                     </div>
                 </a>
 
-                <!-- 3. Accounting (active) -->
-                <a href="#" class="group bg-cardHover w-full max-w-[333px] lg:w-[333px] h-[268px] rounded-[8px] border border-cardBorder p-[30px] flex justify-between no-underline">
-                    <div class="flex flex-col justify-between">
-                        <div class="bg-orange shadow-[0_12px_16px_rgba(0,0,0,0.08)] w-20 h-20 rounded-full flex items-center justify-center">
-                            <img src="icons/whiteDollar-sign.svg" alt="" class="w-10 h-10">
+                <!-- 3 Accounting (active) -->
+                <a href="#" class="card active">
+                    <div class="card-left">
+                        <div class="icon">
+                            <img class="orange" src="icons/dollar-sign.svg" alt="">
+                            <img class="white" src="icons/whiteDollar-sign.svg" alt="">
                         </div>
                         <div>
-                            <h2 class="text-darkBlue font-semibold text-xl leading-8">Accounting</h2>
-                            <p class="text-greyText font-dm text-base mt-2">158 Jobs Opened</p>
+                            <h2 class="card-name">Accounting</h2>
+                            <p class="card-jobs">158 Jobs Opened</p>
                         </div>
                     </div>
-                    <div class="flex items-end">
-                        <img src="icons/arrow-right-btn.svg" alt="" class="w-[33px] h-[33px]">
+                    <div class="card-arrow">
+                        <img src="icons/arrow-right-btn.svg" alt="">
                     </div>
                 </a>
 
-                <!-- 4. Photography -->
-                <a href="#" class="group bg-white hover:bg-cardHover w-full max-w-[333px] lg:w-[333px] h-[268px] rounded-[8px] border border-cardBorder p-[30px] flex justify-between no-underline">
-                    <div class="flex flex-col justify-between">
-                        <div class="bg-softOrange group-hover:bg-orange group-hover:shadow-[0_12px_16px_rgba(0,0,0,0.08)] w-20 h-20 rounded-full flex items-center justify-center">
-                            <img src="icons/camera.svg" alt="" class="w-10 h-10 group-hover:hidden">
-                            <img src="icons/whiteCamera.svg" alt="" class="w-10 h-10 hidden group-hover:block">
+                <!-- 4 -->
+                <a href="#" class="card">
+                    <div class="card-left">
+                        <div class="icon">
+                            <img class="orange" src="icons/camera.svg" alt="">
+                            <img class="white" src="icons/whiteCamera.svg" alt="">
                         </div>
                         <div>
-                            <h2 class="text-darkBlue font-semibold text-xl leading-8">Photography</h2>
-                            <p class="text-greyText font-dm text-base mt-2">95 Jobs Opened</p>
+                            <h2 class="card-name">Photography</h2>
+                            <p class="card-jobs">95 Jobs Opened</p>
                         </div>
                     </div>
-                    <div class="flex items-end">
-                        <img src="icons/arrow-right-btn.svg" alt="" class="w-[33px] h-[33px]">
+                    <div class="card-arrow">
+                        <img src="icons/arrow-right-btn.svg" alt="">
                     </div>
                 </a>
 
-                <!-- 5. Copy Writing -->
-                <a href="#" class="group bg-white hover:bg-cardHover w-full max-w-[333px] lg:w-[333px] h-[268px] rounded-[8px] border border-cardBorder p-[30px] flex justify-between no-underline">
-                    <div class="flex flex-col justify-between">
-                        <div class="bg-softOrange group-hover:bg-orange group-hover:shadow-[0_12px_16px_rgba(0,0,0,0.08)] w-20 h-20 rounded-full flex items-center justify-center">
-                            <img src="icons/create.svg" alt="" class="w-10 h-10 group-hover:hidden">
-                            <img src="icons/whiteCreate.svg" alt="" class="w-10 h-10 hidden group-hover:block">
+                <!-- 5 -->
+                <a href="#" class="card">
+                    <div class="card-left">
+                        <div class="icon">
+                            <img class="orange" src="icons/create.svg" alt="">
+                            <img class="white" src="icons/whiteCreate.svg" alt="">
                         </div>
                         <div>
-                            <h2 class="text-darkBlue font-semibold text-xl leading-8">Copy Writing</h2>
-                            <p class="text-greyText font-dm text-base mt-2">113 Jobs Opened</p>
+                            <h2 class="card-name">Copy Writing</h2>
+                            <p class="card-jobs">113 Jobs Opened</p>
                         </div>
                     </div>
-                    <div class="flex items-end">
-                        <img src="icons/arrow-right-btn.svg" alt="" class="w-[33px] h-[33px]">
+                    <div class="card-arrow">
+                        <img src="icons/arrow-right-btn.svg" alt="">
                     </div>
                 </a>
 
-                <!-- 6. Music -->
-                <a href="#" class="group bg-white hover:bg-cardHover w-full max-w-[333px] lg:w-[333px] h-[268px] rounded-[8px] border border-cardBorder p-[30px] flex justify-between no-underline">
-                    <div class="flex flex-col justify-between">
-                        <div class="bg-softOrange group-hover:bg-orange group-hover:shadow-[0_12px_16px_rgba(0,0,0,0.08)] w-20 h-20 rounded-full flex items-center justify-center">
-                            <img src="icons/headphone.svg" alt="" class="w-10 h-10 group-hover:hidden">
-                            <img src="icons/whiteHeadphone.svg" alt="" class="w-10 h-10 hidden group-hover:block">
+                <!-- 6 -->
+                <a href="#" class="card">
+                    <div class="card-left">
+                        <div class="icon">
+                            <img class="orange" src="icons/headphone.svg" alt="">
+                            <img class="white" src="icons/whiteHeadphone.svg" alt="">
                         </div>
                         <div>
-                            <h2 class="text-darkBlue font-semibold text-xl leading-8">Music</h2>
-                            <p class="text-greyText font-dm text-base mt-2">55 Jobs Opened</p>
+                            <h2 class="card-name">Music</h2>
+                            <p class="card-jobs">55 Jobs Opened</p>
                         </div>
                     </div>
-                    <div class="flex items-end">
-                        <img src="icons/arrow-right-btn.svg" alt="" class="w-[33px] h-[33px]">
+                    <div class="card-arrow">
+                        <img src="icons/arrow-right-btn.svg" alt="">
                     </div>
                 </a>
 
-                <!-- 7. Human Resources -->
-                <a href="#" class="group bg-white hover:bg-cardHover w-full max-w-[333px] lg:w-[333px] h-[268px] rounded-[8px] border border-cardBorder p-[30px] flex justify-between no-underline">
-                    <div class="flex flex-col justify-between">
-                        <div class="bg-softOrange group-hover:bg-orange group-hover:shadow-[0_12px_16px_rgba(0,0,0,0.08)] w-20 h-20 rounded-full flex items-center justify-center">
-                            <img src="icons/humans.svg" alt="" class="w-10 h-10 group-hover:hidden">
-                            <img src="icons/whiteHumans.svg" alt="" class="w-10 h-10 hidden group-hover:block">
+                <!-- 7 -->
+                <a href="#" class="card">
+                    <div class="card-left">
+                        <div class="icon">
+                            <img class="orange" src="icons/humans.svg" alt="">
+                            <img class="white" src="icons/whiteHumans.svg" alt="">
                         </div>
                         <div>
-                            <h2 class="text-darkBlue font-semibold text-xl leading-8">Human Resources</h2>
-                            <p class="text-greyText font-dm text-base mt-2">25 Jobs Opened</p>
+                            <h2 class="card-name">Human Resources</h2>
+                            <p class="card-jobs">25 Jobs Opened</p>
                         </div>
                     </div>
-                    <div class="flex items-end">
-                        <img src="icons/arrow-right-btn.svg" alt="" class="w-[33px] h-[33px]">
+                    <div class="card-arrow">
+                        <img src="icons/arrow-right-btn.svg" alt="">
                     </div>
                 </a>
 
-                <!-- 8. Explore -->
-                <a href="#" class="relative bg-orange w-full max-w-[333px] lg:w-[333px] h-[268px] rounded-[8px] flex items-center justify-center overflow-hidden no-underline">
-                    <img src="icons/twoWaves.svg" alt="" class="absolute inset-0 w-full h-full object-cover pointer-events-none">
-                    <div class="relative z-10 flex items-end gap-2 text-white text-2xl font-medium leading-[34px]">
+                <!-- 8 Explore -->
+                <a href="#" class="card-explore">
+                    <img class="wave" src="icons/twoWaves.svg" alt="">
+                    <div class="explore-text">
                         <span>Explore<br>30 More<br>Categories</span>
-                        <img src="icons/arrow-right-white-btn.svg" alt="" class="w-[33px] h-[33px] mb-1">
+                        <img src="icons/arrow-right-white-btn.svg" alt="">
                     </div>
                 </a>
 
